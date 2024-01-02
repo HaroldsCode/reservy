@@ -6,6 +6,7 @@ import dev.harolds.reservy.booking.dto.response.BookingCreatedDTO;
 import dev.harolds.reservy.booking.entity.Booking;
 import dev.harolds.reservy.booking.repository.BookingRepository;
 import dev.harolds.reservy.restaurant.repository.RestaurantRepository;
+import dev.harolds.reservy.restaurant.service.RestaurantService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -18,11 +19,11 @@ public class BookingServiceImpl implements BookingService {
 
     private BookingRepository bookingRepository;
 
-    private RestaurantRepository restaurantRepository;
+    private RestaurantService restaurantService;
 
-    public BookingServiceImpl(BookingRepository bookingRepository, RestaurantRepository restaurantRepository) {
+    public BookingServiceImpl(BookingRepository bookingRepository, RestaurantService restaurantService) {
         this.bookingRepository = bookingRepository;
-        this.restaurantRepository = restaurantRepository;
+        this.restaurantService = restaurantService;
     }
 
     @Override
@@ -44,7 +45,7 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public BookingCreatedDTO saveBooking(CreateBookingDTO bookingToSave) {
 
-        if (restaurantRepository.findRestaurantById(bookingToSave.getRestaurantId()) == null) return null;
+        if (restaurantService.findRestaurantById(bookingToSave.getRestaurantId()) == null) return null;
 
         Booking saved = bookingRepository.save(
             Booking.builder()

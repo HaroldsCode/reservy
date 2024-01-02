@@ -41,8 +41,8 @@ public class BookingController {
     public ResponseEntity<?> createBooking(@RequestBody CreateBookingDTO create) {
         BookingCreatedDTO saved = bookingService.saveBooking(create);
         if (saved == null) return new ResponseEntity<>(
-                new GeneralResponse<Object>("El restaurante no existe"),
-                HttpStatus.NOT_FOUND
+                new GeneralResponse<Object>("No se pudo crear la reserva"),
+                HttpStatus.BAD_REQUEST
         );
 
         return new ResponseEntity<>(

@@ -1,9 +1,15 @@
 package dev.harolds.reservy.restaurant.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table( name = "restaurant" )
 public class Restaurant {
@@ -24,6 +30,6 @@ public class Restaurant {
     @Column( name = "city", nullable = false)
     private String city;
 
-    @Column( name = "tables", nullable = false )
+    @Column( name = "available_tables", nullable = false )
     private Integer tablesAvailable;
 }
